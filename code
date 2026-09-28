@@ -1,0 +1,46 @@
+import random as r
+want_to_play =True
+win=False
+attempts=0
+games_played=0 
+best=0
+num=0
+guess=0
+ask="y"
+total_attempts_all_games = 0 
+while want_to_play==True:
+    num=r.randint(0,100)
+    while win==False:
+        try:
+            guess=int(input("enter your guess number between 0 to 100\n"))
+        except Exception as e :
+            print("invalid input ")
+            continue
+        attempts = attempts + 1
+        if guess==num :
+            print("Congratulations you win")
+            win=True
+            games_played=games_played+1
+            if attempts < best or best== 0:
+                best=attempts
+        elif guess>num:
+            print("try something smaller")
+        elif guess<num:
+            print("try bigger number")
+        
+        print("attempts=",attempts)
+    while win==True:
+        total_attempts_all_games += attempts
+        print ("best score",best,"game played",games_played)
+        ask=input("do you want to continue playing (y/n)")
+        if ask=="y":
+            want_to_play=True
+            win=False
+            attempts=0
+            break
+        elif ask=="n" :
+            want_to_play=False
+            print("total attempts",attempts,"best score :", best)
+            print("total attemps in all games",total_attempts_all_games,"total game played",games_played)
+            print("avg games to solve the game", total_attempts_all_games/games_played)
+            break
